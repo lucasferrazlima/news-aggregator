@@ -1,5 +1,6 @@
-import Image from 'next/image'
+import { useRef } from 'react'
 import styled from 'styled-components'
+import { useState, useEffect } from 'react'
 
 const Feed = styled.div`
   display: grid;
@@ -13,26 +14,53 @@ const Feed = styled.div`
 const Card = styled.div`
   width: 100%;
   height: auto;
-  background-color: lightblue; 
+  background-color: lightblue;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 `
 const ArticleImage = styled.img`
   width: 100%;
   height: auto;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
 `
 
 export default function NewsCard({ articles }) {
+
+  const [cardsToShow, setCardsToShow] = useState(6)
+
+  useEffect(() => {
+    function handleScroll() {
+      const windowHeight = window.innerHeight;
+      const fullHeight = document.body.clientHeight;
+    
+      const scrollTop = window.pageYOffset || (document.documentElement || document.body.parentNode || document.body).scrollTop;
+      if (fullHeight - (windowHeight + scrollTop) < 50) {
+        setCardsToShow((prev) => prev + 6);
+      }
+    }
+  
+    window.addEventListener('scroll', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [cardsToShow])
+
   return (
-    <Feed>
-      {articles.map((article) => {
+    <Feed className='feed'>
+      
+      {articles.slice(0, cardsToShow).map((article) => {
         
         // Remove the source name from the title
         const articleTitle = article.title.replace(` - ${article.source.name}`, '')
 
         // Format the published date
         const publishedDate = new Date()
-
+        
         return(
-          <Card key={article.url}>
+          <Card key={article.url} >
           <ArticleImage src={article.urlToImage} alt={article.description} />
           <div>{article.source.name}</div>
           <div>{publishedDate.toLocaleDateString()}</div>
