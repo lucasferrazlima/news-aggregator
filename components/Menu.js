@@ -18,8 +18,16 @@ const MenuItem = styled.li`
   cursor: pointer;
   font-family: 'Montserrat';
   align-self: center;
+  background-image: linear-gradient(#007aff 0 0);
+  background-size: 200% .08em;
+  background-position: 200% 100%;
+  background-repeat: no-repeat;
+  transition: background-size .3s, background-position .3s .3s, color .3s .3s;
   &:hover {
-    color: #ff0000;
+    transition: background-size .3s .3s, background-position .3s, color .3s .3s;
+    background-size: 200% 100%;
+    background-position: 100% 100%;
+    color: #fff;
   }
 `
 

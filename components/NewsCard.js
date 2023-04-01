@@ -33,7 +33,7 @@ const Card = styled.div`
 `
 const ArticleImage = styled.img`
   width: 100%;
-  height: 60%;
+  height: 200px;
   object-fit: cover;
   margin-bottom: 0.5rem;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.15);
