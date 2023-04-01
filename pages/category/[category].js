@@ -23,7 +23,6 @@ export default function Category({ articles }) {
   // Render the articles for the specified category
   return (
     <>
-      <h1>News Aggregator - {category}</h1>
       <NewsCard articles={articles}/>
     </>
   )

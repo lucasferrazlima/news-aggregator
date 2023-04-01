@@ -11,10 +11,10 @@ accent: '#007aff'
 const Feed = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  grid-gap: 3rem;
+  grid-gap: 4rem;
   padding: 1rem;
   padding-left: 10%;
-  padding-right: 10rem;
+  padding-right: 10%;
 `
 
 const Card = styled.div`
@@ -22,19 +22,21 @@ const Card = styled.div`
   height: auto;
   color: ${colors.primary};
   background-color: ${colors.secondary};
-  border-top-left-radius: 30px;
-  border-top-right-radius: 30px;
-  border-bottom-left-radius: 15px;
-  border-bottom-right-radius: 15px;
+
+  box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.15);
   display: flex;
   flex-direction: column;
+  &:hover {
+    cursor: pointer;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.15);
+  }
 `
 const ArticleImage = styled.img`
   width: 100%;
-  height: auto;
-  border-top-left-radius: 30px;
-  border-top-right-radius: 30px;
+  height: 60%;
+  object-fit: cover;
   margin-bottom: 0.5rem;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.15);
 `
 
 const CardTitle = styled.h3`
@@ -58,6 +60,16 @@ const ArticleDate = styled.div`
   font-weight: lighter;
   margin: 0.1rem 1rem;
   font-family: 'Lato', 'Roboto', sans-serif;
+  // stay on far right
+  margin-left: auto;
+  color: #5A5A5A;
+`
+
+const ArticleDescription = styled.div`
+  font-size: 0.9rem;
+  font-weight: lighter;
+  margin: 0.1rem 1rem;
+  font-family: 'Lato', 'Roboto', sans-serif;
   color: #5A5A5A;
 `
 
@@ -69,9 +81,15 @@ const ReadMore = styled.a`
   color: ${colors.accent};
   text-decoration: none;
   align-self: flex-end;
-  margin-top: auto;
+  margin-top: auto;     
   margin-bottom: 1rem;
 `
+
+// Open the article in a new tab
+function handleCardClick(url) {
+  window.open(url, '_blank');
+}
+
 
 export default function NewsCard({ articles }) {
 
@@ -100,10 +118,16 @@ export default function NewsCard({ articles }) {
     }
   }, [cardsToShow])
 
+  // Filter out articles that don't have an image
+  const filteredArticles = articles.filter(
+    (article) => article.urlToImage !== null
+  );
+
+
   return (
     <Feed className='feed'>
       
-      {articles.slice(0, cardsToShow).map((article) => {
+      {filteredArticles.slice(0, cardsToShow).map((article) => {
         
         // Remove the source name from the title
         const articleTitle = article.title.replace(` - ${article.source.name}`, '')
@@ -112,11 +136,14 @@ export default function NewsCard({ articles }) {
         const publishedDate = new Date()
         
         return(
-          <Card key={article.url} >
+        <Card key={article.url} onClick={() => handleCardClick(article.url)} >
           <ArticleImage src={article.urlToImage} alt={article.description} />
-          <SourceName>{article.source.name}</SourceName> 
-          <ArticleDate>{publishedDate.toLocaleDateString()}</ArticleDate>
+          <div style={{ display: 'flex' }}>
+            <SourceName>{article.source.name}</SourceName> 
+            <ArticleDate>{publishedDate.toLocaleDateString()}</ArticleDate>
+          </div>
           <CardTitle>{articleTitle}</CardTitle>
+          <ArticleDescription>{article.description}</ArticleDescription>
           <ReadMore href={article.url} target="_blank">Read full article</ReadMore>
         </Card>
         )
