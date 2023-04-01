@@ -20,7 +20,6 @@ export default function Home({ articles }) {
   return (
     <>
       <h1>News Aggregator</h1>
-      <Menu />
       <NewsCard articles={articles} />
     </>
   )

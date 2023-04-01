@@ -24,7 +24,6 @@ export default function Category({ articles }) {
   return (
     <>
       <h1>News Aggregator - {category}</h1>
-      <Menu />
       <NewsCard articles={articles}/>
     </>
   )
