@@ -7,11 +7,12 @@ const MenuBar = styled.ul`
   justify-content: space-around;
   list-style: none;
   padding: 0;
-  margin: 1rem 10rem;
+  margin: 1rem 6rem;
   color: black;
   font-size: 1.2rem;
   font-weight: 600;
   padding: 1rem;
+  background-color: #f2f2f2;
 `
 
 const MenuItem = styled.li`
@@ -29,6 +30,8 @@ const MenuItem = styled.li`
     background-position: 100% 100%;
     color: #fff;
   }
+
+
 `
 
 const Title = styled.h1`
@@ -38,7 +41,7 @@ const Title = styled.h1`
   color: #007aff;
   margin: 0;
   padding: 0;
-  padding-right: 2rem;
+  padding-right: 1rem;
   border-right: 5px solid #007aff;
 `
 
