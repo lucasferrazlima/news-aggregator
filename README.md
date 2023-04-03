@@ -16,10 +16,10 @@ View detailed news articles with images and descriptions.
 Fully responsive design that adapts to different screen sizes.
 Simple and intuitive user interface.
 ### Technologies Used
-Next.js
-React
-NewsAPI
-Styled Components
+Next.js <br>
+React <br>
+HTTP REST API <br>
+Styled Components <br>
 ### Credits
 This application was created by Lucas Lima. Special thanks to NewsAPI for providing the data used in this project.
 
