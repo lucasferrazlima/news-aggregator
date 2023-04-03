@@ -27,7 +27,6 @@ const Card = styled.div`
   display: flex;
   flex-direction: column;
   &:hover {
-    cursor: pointer;
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.15);
   }
 `
@@ -83,13 +82,10 @@ const ReadMore = styled.a`
   align-self: flex-end;
   margin-top: auto;     
   margin-bottom: 1rem;
+  &:hover {
+    text-decoration: underline;
+  }
 `
-
-// Open the article in a new tab
-function handleCardClick(url) {
-  window.open(url, '_blank');
-}
-
 
 export default function NewsCard({ articles }) {
 
@@ -136,7 +132,7 @@ export default function NewsCard({ articles }) {
         const publishedDate = new Date()
         
         return(
-        <Card key={article.url} onClick={() => handleCardClick(article.url)} >
+        <Card key={article.url} >
           <ArticleImage src={article.urlToImage} alt={article.description} />
           <div style={{ display: 'flex' }}>
             <SourceName>{article.source.name}</SourceName> 
