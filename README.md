@@ -23,5 +23,5 @@ Styled Components
 ### Credits
 This application was created by Lucas Lima. Special thanks to NewsAPI for providing the data used in this project.
 
-License
+### License
 This project is licensed under the MIT License.
